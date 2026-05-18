@@ -2,6 +2,7 @@ import "./App.css";
 import { Navigation } from "./components/Navigation/Navigation";
 import { OpportGrid } from "./components/OpportGrid/OpportGrid";
 import { PlatformCards } from "./components/PlatformCards/PlatformCards";
+import './adaptive.css'
 
 function App() {
   return (
