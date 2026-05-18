@@ -1,0 +1,53 @@
+.nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 40px 40px 10px 40px;
+    font-size: 14px;
+    background-color: var(--bgColor);
+    z-index: 1000;
+}
+
+.langChanger, .navElements, .navLinks  {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navLinks{
+    padding-right: 40px;
+    gap: 30px;
+    border-right: 1px var(--mainColor) solid;
+}
+
+.langChanger{
+    gap: 20px;
+    padding-left: 40px;
+}
+
+.logoIcon {
+    width: 50px;
+    height: auto;
+}
+
+.logoFlex {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.logoTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.langChanger .ru {
+    background-color: var(--accent-color);
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--secondaryAccent-color);
+}

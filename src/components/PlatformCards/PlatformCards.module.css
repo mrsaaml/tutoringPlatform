@@ -1,0 +1,61 @@
+.yellowCard {
+  border-color: #472f0f;
+  background: linear-gradient(to bottom, #30200b, transparent);
+}
+
+.blueCard {
+  border-color: #1a214f;
+  background: linear-gradient(to bottom, #171c3cc7, transparent);
+}
+
+.greenCard {
+  border-color: #11463e;
+  background: linear-gradient(to bottom, #07211d, transparent);
+}
+
+.card {
+  padding: 40px;
+  border-radius: 30px;
+  border: 1px white solid;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 18px !important;
+}
+
+.card h3 {
+  color: var(--secondaryAccent-color);
+  font-size: 20px;
+}
+
+.desc1 {
+  opacity: 0.5;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.desc1,
+.desc2 {
+  width: 100%;
+  text-align: left;
+}
+
+.desc2 {
+  font-size: 16px;
+}
+
+.card button {
+  color: var(--secondaryAccent-color);
+  font-weight: 700;
+  width: fit-content;
+  margin-top: 10px;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card span {
+  color: var(--secondaryAccent-color);
+}
