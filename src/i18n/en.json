@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "platforms": "Platforms",
+    "stats": "Statistics",
+    "opportunities": "Opportunities",
+    "contact": "Contact",
+    "title": "Tutoring Platform"
+  },
+  "hero": {
+    "title1": "Your future starts",
+    "title2": "here.",
+    "desc": "A complete SAT and IELTS preparation platform with personalized learning, weekly tests and AI-based feedback."
+  },
+  "problem": {
+    "label": "PROBLEM",
+    "title": "Exam preparation should not be chaos",
+    "desc": "Scattered materials. No analytics. No feedback. Students waste time instead of achieving results."
+  },
+  "platforms": {
+    "title": "Three platforms. One ecosystem.",
+    "label": "PLATFORMS",
+    "lmsTitle": "LMS",
+    "lmsDesc1": "Learning management",
+    "lmsDesc2": "Study materials, gradebook and real-time communication.",
+    "satTitle": "SAT",
+    "satDesc1": "Testing",
+    "satDesc2": "Practice tests with instant feedback and AI recommendations.",
+    "ieltsTitle": "IELTS",
+    "ieltsDesc1": "Preparation",
+    "ieltsDesc2": "Listening, reading, writing and speaking with AI scoring."
+  },
+  "opportunities": {
+    "label": "OPPORTUNITIES",
+    "title": "Built for results",
+    "analytics": {
+      "title": "Real-time analytics",
+      "desc": "Detailed progress statistics"
+    },
+    "ai": {
+      "title": "AI feedback",
+      "desc": "Personalized recommendations after each test"
+    },
+    "leader": {
+      "title": "Leaderboards",
+      "desc": "Compete with other students"
+    },
+    "device": {
+      "title": "Any device",
+      "desc": "Learn on computer, tablet or phone"
+    },
+    "teacher": {
+      "title": "Expert teacher",
+      "desc": "SAT and IELTS specialist"
+    },
+    "results": {
+      "title": "Proven results",
+      "desc": "1500+ students achieved their goals"
+    }
+  },
+  "platforms": {
+  "lms": "LMS",
+  "lmsDesc1": "Learning management",
+  "lmsDesc2": "Study materials, gradebook and real-time communication.",
+
+  "sat": "SAT",
+  "satDesc1": "Testing",
+  "satDesc2": "Practice tests with instant feedback and AI recommendations.",
+
+  "ielts": "IELTS",
+  "ieltsDesc1": "Preparation",
+  "ieltsDesc2": "Listening, reading, writing and speaking with AI scoring."
+},
+  "achievements": {
+    "label": "ACHIEVEMENTS"
+  },
+  "stats": {
+    "title": "Numbers speak for themselves",
+    "students": "Active students",
+    "groups": "Study groups",
+    "success": "Success rate",
+    "tests": "Tests completed"
+  },
+  "contact": {
+    "title": "Ready to improve your results?",
+    "desc": "Join thousands of students who already achieved their goals.",
+    "btn1": "Message on WhatsApp",
+    "btn2": "Enter LMS"
+  },
+  "footer": {
+    "desc": "Your trusted partner for SAT and IELTS preparation. AI-powered learning platforms.",
+    "platforms": "Platforms",
+     "opportunities":"Opportunities",
+    "statistics":"Statistics",
+    "resources": "Resources",
+    "contacts": "Contacts",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
+  }
+}
