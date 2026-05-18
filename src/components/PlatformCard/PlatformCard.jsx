@@ -1,17 +1,32 @@
-import styles from "./PlatformCard.module.css";
+import styles from "./PlatformCard.module.css"
+import { useTranslation } from "react-i18next"
 
+export const PlatformCard = ({
+  className,
+  image,
+  titleKey,
+  desc1Key,
+  desc2Key,
+}) => {
+  const { t } = useTranslation()
 
-export const PlatformCard = ({className, image, title, desc1, desc2 }) => {
   return (
     <div className={`${styles.card} ${className}`}>
-      <img src={image} alt={title} className={styles.cardIcon} />
+      <img src={image} alt="" className={styles.cardIcon} />
 
-      <h3>{title}</h3>
+      <h3>{t(`platforms.${titleKey}`)}</h3>
 
-      <p className={styles.desc1}>{desc1}</p>
-      <p className={styles.desc2}>{desc2}</p>
+      <p className={styles.desc1}>
+        {t(`platforms.${desc1Key}`)}
+      </p>
 
-      <button>Open <span>⭢</span></button>
+      <p className={styles.desc2}>
+        {t(`platforms.${desc2Key}`)}
+      </p>
+
+      <button>
+        Open <span>⭢</span>
+      </button>
     </div>
-  );
-};
+  )
+}

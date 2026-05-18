@@ -45,9 +45,20 @@
     color: var(--accent-color);
 }
 
-.langChanger .ru {
-    background-color: var(--accent-color);
-    padding: 10px;
-    border-radius: 5px;
-    color: var(--secondaryAccent-color);
+.langChanger {
+  display: flex;
+  gap: 10px;
+}
+
+.lang {
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: var(--secondaryAccent-color);
+}
+
+.active {
+  background-color: var(--accent-color);
+  color: var(--secondaryAccent-color);
 }

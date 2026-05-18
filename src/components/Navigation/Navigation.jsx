@@ -1,33 +1,46 @@
-import styles from "./Navigation.module.css";
+import styles from "./Navigation.module.css"
+import { useTranslation } from "react-i18next"
 
 export const Navigation = () => {
+  const { t, i18n } = useTranslation()
+
   return (
     <nav className={styles.nav}>
       <div className={styles.logoFlex}>
         <img src="./logoIcon.png" alt="" className={styles.logoIcon} />
-        <div className={styles.logoTitle}>Tutoring Platform</div>
+        <div className={styles.logoTitle}>
+          {t("nav.title")}
+        </div>
       </div>
+
       <div className={styles.navElements}>
         <div className={styles.navLinks}>
-          <a href="#platforms" className="link">
-            Платформы
-          </a>
-          <a href="#statistics" className="link">
-            Статистика
-          </a>
-          <a href="#opportunities" className="link">
-            Возможности
-          </a>
-          <a href="#contact" className="link">
-            Контакты
-          </a>
+          <a href="#platforms">{t("nav.platforms")}</a>
+          <a href="#statistics">{t("nav.stats")}</a>
+          <a href="#opportunities">{t("nav.opportunities")}</a>
+          <a href="#contact">{t("nav.contact")}</a>
         </div>
 
         <div className={styles.langChanger}>
-          <div className={styles.ru}>Ру</div>
-          <div className={styles.eng}>Eng</div>
+          <div
+            className={`${styles.lang} ${
+              i18n.language === "ru" ? styles.active : ""
+            }`}
+            onClick={() => i18n.changeLanguage("ru")}
+          >
+            RU
+          </div>
+
+          <div
+            className={`${styles.lang} ${
+              i18n.language === "en" ? styles.active : ""
+            }`}
+            onClick={() => i18n.changeLanguage("en")}
+          >
+            EN
+          </div>
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
