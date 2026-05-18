@@ -107,19 +107,19 @@ function App() {
 
       <div className="socials">
         <a href="#">
-          <img src="/footer/instagram.svg" alt="" />
+          <img src="./footer/instagram.svg" alt="" />
         </a>
 
         <a href="#">
-          <img src="/footer/telegram.svg" alt="" />
+          <img src="./footer/telegram.svg" alt="" />
         </a>
 
         <a href="#">
-          <img src="/whatsapp.svg" alt="" />
+          <img src="./whatsapp.svg" alt="" />
         </a>
 
         <a href="#">
-          <img src="/footer/tiktok.svg" alt="" />
+          <img src="./footer/tiktok.svg" alt="" />
         </a>
       </div>
     </div>
