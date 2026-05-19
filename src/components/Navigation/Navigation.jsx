@@ -1,24 +1,26 @@
-import styles from "./Navigation.module.css"
-import { useTranslation } from "react-i18next"
+import { Link } from "react-router";
+import styles from "./Navigation.module.css";
+import { useTranslation } from "react-i18next";
 
 export const Navigation = () => {
-  const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation();
 
   return (
     <nav className={styles.nav}>
-      <div className={styles.logoFlex}>
+      <Link to="/#heroPage" className={styles.logoFlex}>
         <img src="./logoIcon.png" alt="" className={styles.logoIcon} />
-        <div className={styles.logoTitle}>
-          {t("nav.title")}
-        </div>
-      </div>
+        <div className={styles.logoTitle}>{t("nav.title")}</div>
+      </Link>
 
       <div className={styles.navElements}>
         <div className={styles.navLinks}>
-          <a href="#platforms">{t("nav.platforms")}</a>
-          <a href="#statistics">{t("nav.stats")}</a>
-          <a href="#opportunities">{t("nav.opportunities")}</a>
-          <a href="#contact">{t("nav.contact")}</a>
+          <Link to="/#platforms">{t("nav.platforms")}</Link>
+
+          <Link to="/#statistics">{t("nav.stats")}</Link>
+
+          <Link to="/#opportunities">{t("nav.opportunities")}</Link>
+
+          <Link to="/#contact">{t("nav.contact")}</Link>
         </div>
 
         <div className={styles.langChanger}>
@@ -42,5 +44,5 @@ export const Navigation = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};

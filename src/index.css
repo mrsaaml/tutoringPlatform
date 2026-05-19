@@ -8,6 +8,10 @@
   transition: .2s all;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --accent-color: #7173d7;
   --bgColor: black;

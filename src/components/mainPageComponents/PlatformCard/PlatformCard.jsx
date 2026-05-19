@@ -1,13 +1,17 @@
+import { useNavigate } from "react-router"
 import styles from "./PlatformCard.module.css"
 import { useTranslation } from "react-i18next"
 
 export const PlatformCard = ({
+  pathTo,
   className,
   image,
   titleKey,
   desc1Key,
   desc2Key,
 }) => {
+  const nav = useNavigate()
+
   const { t } = useTranslation()
 
   return (
@@ -24,7 +28,7 @@ export const PlatformCard = ({
         {t(`platforms.${desc2Key}`)}
       </p>
 
-      <button>
+      <button onClick={()=>nav(pathTo)}>
         Open <span>⭢</span>
       </button>
     </div>
