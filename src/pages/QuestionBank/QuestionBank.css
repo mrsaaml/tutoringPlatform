@@ -52,7 +52,7 @@
   inset: 0;
 
   background:
-    url("./questionBank/reading.png") right center / 70% no-repeat;
+    url("/questionBank/reading.png") right center / 70% no-repeat;
 opacity: 0.2;
   z-index: 0;
 }
@@ -64,7 +64,7 @@ opacity: 0.2;
   inset: 0;
 
   background:
-    url("./questionBank/math.png") right center / 70% no-repeat;
+    url("/questionBank/math.png") right center / 70% no-repeat;
 opacity: 0.2;
   z-index: 0;
 }
