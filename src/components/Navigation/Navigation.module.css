@@ -11,6 +11,12 @@
     z-index: 1000;
 }
 
+.nav button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 .langChanger, .navElements, .navLinks  {
     display: flex;
     align-items: center;

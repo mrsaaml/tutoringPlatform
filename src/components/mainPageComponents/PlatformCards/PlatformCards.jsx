@@ -5,6 +5,7 @@ export const PlatformCards = () => {
   return (
     <div className="platformCards">
       <PlatformCard
+        pathTo={'/questionBank'}
         className={styles.blueCard}
         image="./platformIcons/book.svg"
         titleKey="lms"
@@ -13,6 +14,7 @@ export const PlatformCards = () => {
       />
 
       <PlatformCard
+        pathTo={'/questionBank'}
         className={styles.greenCard}
         image="./platformIcons/done.svg"
         titleKey="sat"
@@ -21,6 +23,7 @@ export const PlatformCards = () => {
       />
 
       <PlatformCard
+        pathTo={'/questionBank'}
         className={styles.yellowCard}
         image="./platformIcons/language.svg"
         titleKey="ielts"
