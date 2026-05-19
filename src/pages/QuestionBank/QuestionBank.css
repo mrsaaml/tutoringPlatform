@@ -1,0 +1,133 @@
+.questionBank {
+    /* margin-top: -10vh; */
+    height: fit-content;
+}
+
+
+.questionBank img {
+  width: 30px;
+  height: auto;
+}
+
+.questionBank h2 {
+  color: var(--secondaryAccent-color);
+  width: 100%;
+  font-size: 40px;
+}
+
+.testCard h3 {
+  color: var(--secondaryAccent-color);
+}
+
+.testsCover {
+  display: flex;
+  gap: 20px;
+}
+
+.testCard {
+  width: 40vw;
+  border-color: #1a214f;
+  background: linear-gradient(to bottom, #171c3cc7, transparent);
+  padding: 40px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 18px !important;
+  cursor: pointer;
+}
+
+.testsCover .readingTest {
+  background: linear-gradient(to right, #0c1b2c , rgb(23, 31, 81));
+  
+  position: relative;
+  border-radius: 24px;
+  z-index: 10;
+  border: 1.5px rgb(97, 158, 215) solid;
+}
+
+.testsCover .readingTest::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    url("./questionBank/reading.png") right center / 70% no-repeat;
+opacity: 0.2;
+  z-index: 0;
+}
+
+
+.testsCover .mathTest::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    url("./questionBank/math.png") right center / 70% no-repeat;
+opacity: 0.2;
+  z-index: 0;
+}
+
+
+.testsCover .testCard img {
+    width: 30%;
+    height: auto;
+    position: absolute;
+    right: 20px;
+    /* top: -10px; */
+} 
+
+.testsCover .mathTest {
+  background: linear-gradient(to right, #0d2e0f , rgb(22, 83, 21));
+  position: relative;
+  border-radius: 24px;
+  z-index: 10;
+  border: 1.5px rgb(97, 215, 105) solid;
+}
+
+.testCard button {
+  color: var(--secondaryAccent-color);
+  font-weight: 700;
+  width: fit-content;
+  margin-top: 30px;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 50px;
+  color: black;
+  z-index: 100000;
+}
+
+.testCard p {
+  text-align: left;
+  color: #cdcdcd;
+}
+
+.testCard button:hover span {
+  margin-left: 10px;
+  color: var(--accent-color);
+}
+
+.testCard button:hover {
+  color: var(--accent-color);
+}
+
+.testCard span {
+  color: black;
+}
+
+.testCard:hover {
+  transform: scale(1.005);
+}
+
+.questionBank .desc {
+    width: 90%;
+    text-align: center;
+    font-size: 14px;
+}

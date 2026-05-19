@@ -1,0 +1,79 @@
+/* Контейнер для всей сетки */
+.cards-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: 'Inter', 'Arial', sans-serif;
+}
+
+/* Стили карточки по твоему запросу */
+.student-card {
+  width: 40%;
+  border: 1.5px solid #2f3979;
+  background: linear-gradient(to bottom, #171c3cc7, transparent);
+  border-radius: 10px;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 240px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.student-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Блок с текстом */
+.card-content {
+  width: 100%;
+}
+
+.student-name {
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0 0 10px 0;
+  letter-spacing: 1px;
+}
+
+.score-start {
+  color: #c1c1c1;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.arrow {
+  font-size: 22px;
+}
+
+/* Финальные баллы с новой обводкой #7173d7 */
+.score-final {
+  font-size: 56px;
+  font-weight: 900;
+  color: #ffffff;
+  font-style: italic;
+  margin-top: 5vh;
+  line-height: 1;
+  /* Красивая толстая обводка */
+  -webkit-text-stroke: 4px #7173d7;
+  paint-order: stroke fill;
+  /* Дополнительный объем за счет тени */
+  text-shadow: 2px 2px 0px #7173d7; 
+}

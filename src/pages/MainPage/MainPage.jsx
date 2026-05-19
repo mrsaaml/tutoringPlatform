@@ -1,9 +1,10 @@
-import {Navigation} from '../../components/Navigation/Navigation.jsx'
-import {PlatformCards} from '../../components/mainPageComponents/PlatformCards/PlatformCards.jsx'
-import {OpportGrid} from '../../components/mainPageComponents/OpportGrid/OpportGrid.jsx'
-import './MainPage.css'
+import { Navigation } from "../../components/Navigation/Navigation.jsx";
+import { PlatformCards } from "../../components/mainPageComponents/PlatformCards/PlatformCards.jsx";
+import { OpportGrid } from "../../components/mainPageComponents/OpportGrid/OpportGrid.jsx";
+import "./MainPage.css";
 
 import { useTranslation } from "react-i18next";
+import StudentCards from "../../components/mainPageComponents/StudentsCards/StudentsCards.jsx";
 
 export const MainPage = () => {
   const { t } = useTranslation();
@@ -49,6 +50,12 @@ export const MainPage = () => {
         <OpportGrid />
       </section>
 
+      {/* RESULTS */}
+      <section className="results">
+        <h2>Результаты студентов</h2>
+        <StudentCards />
+      </section>
+
       {/* STATS */}
       <section className="achievSection" id="statistics">
         <p className="title">{t("achievements.label")}</p>
@@ -85,11 +92,15 @@ export const MainPage = () => {
         <p>{t("contact.desc")}</p>
 
         <div className="buttonsFlex">
-          <button>
+          <a
+            href="https://wa.me/996702293520"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="yourButtonClass"
+          >
             <img src="./whatsapp.svg" />
             {t("contact.btn1")}
-          </button>
-
+          </a>
           <button>
             {t("contact.btn2")} <span>⭢</span>
           </button>
@@ -110,10 +121,10 @@ export const MainPage = () => {
               <a href="#">
                 <img src="./footer/instagram.svg" />
               </a>
-              <a href="#">
+              <a href="https://t.me/onemoonnnnn">
                 <img src="./footer/telegram.svg" />
               </a>
-              <a href="#">
+              <a href="https://wa.me/+996702293520">
                 <img src="./whatsapp.svg" />
               </a>
               <a href="#">
@@ -137,7 +148,7 @@ export const MainPage = () => {
 
           <div className="footerLinks">
             <h4>{t("footer.contacts")}</h4>
-            <a href="tel:+77007380691">+7 (700) 738-06-91</a>
+            <a href="tel:+996702293520">+996 (702) 293520</a>
           </div>
         </div>
 
