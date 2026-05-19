@@ -87,7 +87,7 @@ p {
   width: 30px;
   height: auto;
 }
-.contactSection .buttonsFlex button {
+.contactSection .buttonsFlex a, .buttonsFlex button {
   border-radius: 50px;
   height: 60px;
   padding: 20px 30px;
@@ -99,7 +99,7 @@ p {
   cursor: pointer;
 }
 
-.contactSection .buttonsFlex button:nth-child(1):hover {
+.contactSection .buttonsFlex a:nth-child(1):hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px #7173d76f;
 }
@@ -110,7 +110,7 @@ p {
 }
 
 
-.contactSection .buttonsFlex button:nth-child(1) {
+.contactSection .buttonsFlex a:nth-child(1) {
   background-color: var(--accent-color);
   color: var(--secondaryAccent-color);
   border: none;
@@ -244,4 +244,9 @@ p {
 
 .footerPolicy a:hover {
   color: var(--secondaryAccent-color);
+}
+
+.results {
+  height: 140vh;
+  margin-top: 20vh;
 }

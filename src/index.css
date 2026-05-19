@@ -53,3 +53,7 @@ h2 {
   font-size: 70px;
   width: 70%;
 }
+
+body::-webkit-scrollbar {
+  visibility: hidden;
+}
