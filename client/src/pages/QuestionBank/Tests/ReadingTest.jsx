@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Navigation } from "../../../components/Navigation/Navigation";
 import "./Tests.css";
 import { useState } from "react";
@@ -5,22 +6,24 @@ import { useState } from "react";
 const questions = [
   {
     id: 1,
-    text:
-      "When investigating the link between glacial melt and rising sea levels, scientists often require advanced equipment...",
+    text: "When investigating the link between glacial melt and rising sea levels, scientists often require advanced equipment...",
     options: ["levels and", "levels,", "levels", "levels, and"],
     answer: "levels,",
   },
   {
     id: 2,
-    text:
-      "When consumed as a trace component of drinking water, selenium has beneficial effects... These facts are ____ important to ecological chemist Karen Jenni.",
-    options: ["important to:", "important to", "important: to", "important to;"],
+    text: "When consumed as a trace component of drinking water, selenium has beneficial effects... These facts are ____ important to ecological chemist Karen Jenni.",
+    options: [
+      "important to:",
+      "important to",
+      "important: to",
+      "important to;",
+    ],
     answer: "important to",
   },
   {
     id: 3,
-    text:
-      "New research on giant kelp has revealed that this underwater plant can adapt to nutrient shortages... kelp thrives on two ____ and treats them as interchangeable.",
+    text: "New research on giant kelp has revealed that this underwater plant can adapt to nutrient shortages... kelp thrives on two ____ and treats them as interchangeable.",
     options: [
       "nutrients, urea, and ammonium",
       "nutrientsm uream and ammonium",
@@ -31,8 +34,7 @@ const questions = [
   },
   {
     id: 4,
-    text:
-      "Medical practitioners during the Middle Ages believed emotions were explained by substances known ____ both then and now.",
+    text: "Medical practitioners during the Middle Ages believed emotions were explained by substances known ____ both then and now.",
     options: [
       "known, both then and now,",
       "known both the and now,",
@@ -43,8 +45,7 @@ const questions = [
   },
   {
     id: 5,
-    text:
-      "Polynesian and Micronesian navigators used stick ____ that provided information about islands and ocean currents.",
+    text: "Polynesian and Micronesian navigators used stick ____ that provided information about islands and ocean currents.",
     options: [
       "charts, map-like constructions:",
       "charts map-like constructions,",
@@ -56,6 +57,8 @@ const questions = [
 ];
 
 export const ReadingTest = () => {
+  const { t } = useTranslation();
+
   const [selected, setSelected] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [result, setResult] = useState(0);
@@ -145,7 +148,7 @@ export const ReadingTest = () => {
           onClick={submit}
           disabled={!allAnswered}
         >
-          Submit
+          {t("mathTest.submit")}
         </button>
       </section>
 
@@ -153,19 +156,19 @@ export const ReadingTest = () => {
       {openModal && (
         <div className="modalOverlay" onClick={closeModal}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h3>Результат</h3>
+            <h3>{t("mathTest.result")}</h3>
 
             <div className={`resultScore ${getResultColor()}`}>
               {result} / {questions.length}
             </div>
 
             <p className="resultText">
-              {result <= 2 && "Попробуй ещё раз"}
-              {result === 3 || result === 4 ? "Неплохо" : ""}
-              {result === 5 ? "Отличный результат" : ""}
+              {result <= 2 && t("mathTest.tryAgain")}
+              {result === 3 || result === 4 ? t("mathTest.notBad") : ""}
+              {result === 5 ? t("mathTest.great") : ""}
             </p>
 
-            <button onClick={closeModal}>Закрыть</button>
+            <button onClick={closeModal}>{t("mathTest.close")}</button>
           </div>
         </div>
       )}
