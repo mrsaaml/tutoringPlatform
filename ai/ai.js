@@ -5,7 +5,7 @@ const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY
 });
 
-async function getGroqChatCompletion({ question_text, option_a, option_b, option_c, option_d, answer, user_message }) {
+async function getGroqChatCompletion({ question_text, option_a, option_b, option_c, option_d, answer, user_message, history = [] }) {
   return groq.chat.completions.create({
     messages: [
       {
@@ -27,6 +27,7 @@ C) ${option_c}
 D) ${option_d}
 Correct answer: ${answer}`
       },
+      ...history,
       {
         role: "user",
         content: user_message
