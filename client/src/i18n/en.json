@@ -17,7 +17,7 @@
     "desc": "Scattered materials. No analytics. No feedback. Students waste time instead of achieving results."
   },
   "platforms": {
-    "title": "Three platforms. One ecosystem.",
+    "title": "Two platforms. One ecosystem.",
     "label": "PLATFORMS",
     "lmsTitle": "LMS",
     "lmsDesc1": "Learning management",
@@ -95,5 +95,33 @@
     "contacts": "Contacts",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "enter": "Log in",
+    "done": "Done",
+    "noAccount": "No account yet?",
+    "hasAccount": "Already have an account?",
+    "registerBtn": "Register"
+  },
+  "questionBank": {
+    "title": "Question Bank",
+    "readingWriting": "Reading and Writing",
+    "math": "Math",
+    "questions": "5 questions",
+    "open": "Open",
+    "disclaimer": "ONEPREP and PREPPY AI are trademarks or registered trademarks of OnePrep. SAT and AP are trademarks or registered trademarks of College Board, and ACT is a trademark or registered trademark of ACT Education Corp. and are used on this site for identification purposes only. Use of SAT, AP, and ACT on this site does not imply any relationship or affiliation with College Board or ACT Education Corp., or endorsement of the site content or services provided by OnePrep."
+  },
+  "mathTest": {
+    "title": "SAT Math",
+    "submit": "Submit",
+    "result": "Result",
+    "close": "Close",
+    "tryAgain": "Try again",
+    "notBad": "Not bad",
+    "great": "Great result"
   }
 }

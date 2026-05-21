@@ -1,0 +1,247 @@
+.loginPage,
+.regisPage {
+  width: 500px;
+  margin: 10vh auto;
+
+  padding: 50px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  border-radius: 30px;
+
+  border: 1px solid #75757543;
+
+  background:
+    linear-gradient(to bottom, #171c3cc7, transparent);
+
+  box-shadow: 0 10px 30px #00000030;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.loginPage::before,
+.regisPage::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(120, 180, 255, 0.18),
+      transparent 50%
+    );
+
+  z-index: 0;
+}
+
+.loginPage *,
+.regisPage * {
+  z-index: 2;
+}
+
+.loginPage h1,
+.regisPage h1 {
+  color: var(--secondaryAccent-color);
+
+  text-align: center;
+
+  font-size: 42px;
+
+  margin-bottom: 10px;
+}
+
+.loginPage input,
+.regisPage input {
+  width: 100%;
+
+  padding: 18px 24px;
+
+  border-radius: 18px;
+
+  border: 1px solid #75757543;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: var(--secondaryAccent-color);
+
+  font-size: 16px;
+
+  outline: none;
+
+  transition: 0.3s;
+}
+
+.loginPage input::placeholder,
+.regisPage input::placeholder {
+  color: #a5a5a5;
+}
+
+.loginPage input:focus,
+.regisPage input:focus {
+  border-color: var(--accent-color);
+
+  box-shadow: 0 0 20px #7173d746;
+}
+
+.loginPage > button,
+.regisPage > button {
+  margin-top: 10px;
+
+  height: 60px;
+
+  border: none;
+
+  border-radius: 50px;
+
+  background: var(--accent-color);
+
+  color: var(--secondaryAccent-color);
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.loginPage > button:hover,
+.regisPage > button:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 10px 25px #7173d76f;
+}
+
+.loginPage p,
+.regisPage p {
+  width: 100%;
+
+  text-align: center;
+
+  color: #cdcdcd;
+
+  font-size: 15px;
+}
+
+.loginPage p button,
+.regisPage p button {
+  border: none;
+
+  background: transparent;
+
+  color: var(--accent-color);
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.loginPage p button:hover,
+.regisPage p button:hover {
+  color: var(--secondaryAccent-color);
+}
+
+nav {
+  padding: 40px;
+}
+
+.logoFlex {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  width: fit-content;
+}
+
+.logoIcon {
+  width: 50px;
+
+  height: 50px;
+
+  border-radius: 50%;
+
+  border: 1px solid #75757543;
+
+  background:
+    linear-gradient(
+      to right,
+      #1f1f1f80,
+      transparent
+    );
+}
+
+.logoTitle {
+  color: var(--secondaryAccent-color);
+
+  font-size: 24px;
+
+  font-weight: 700;
+}
+
+.loginNav {
+    width: 60vw;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.langChanger {
+  display: flex;
+  gap: 10px;
+}
+
+.lang {
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: var(--secondaryAccent-color);
+}
+
+.active {
+  background-color: var(--accent-color);
+  color: var(--secondaryAccent-color);
+}
+
+/* TABLET */
+
+@media (max-width: 768px) {
+  .loginPage,
+  .regisPage {
+    width: 90%;
+    padding: 35px;
+  }
+
+  .loginPage h1,
+  .regisPage h1 {
+    font-size: 32px;
+  }
+}
+
+.cardTitle {
+    align-self: center;
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+  .loginPage,
+  .regisPage {
+    padding: 30px 20px;
+  }
+
+  .logoTitle {
+    font-size: 18px;
+  }
+}

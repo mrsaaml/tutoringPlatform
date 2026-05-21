@@ -22,14 +22,14 @@ export const PlatformCards = () => {
         desc2Key="satDesc2"
       />
 
-      <PlatformCard
+      {/* <PlatformCard
         pathTo={'/questionBank'}
         className={styles.yellowCard}
         image="./platformIcons/language.svg"
         titleKey="ielts"
         desc1Key="ieltsDesc1"
         desc2Key="ieltsDesc2"
-      />
+      /> */}
     </div>
   )
 }
