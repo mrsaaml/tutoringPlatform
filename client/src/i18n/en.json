@@ -11,6 +11,9 @@
     "title2": "here.",
     "desc": "A complete SAT and IELTS preparation platform with personalized learning, weekly tests and AI-based feedback."
   },
+  "results": {
+    "title": "Student Results"
+  },
   "problem": {
     "label": "PROBLEM",
     "title": "Exam preparation should not be chaos",
@@ -57,19 +60,6 @@
       "desc": "1500+ students achieved their goals"
     }
   },
-  "platforms": {
-  "lms": "LMS",
-  "lmsDesc1": "Learning management",
-  "lmsDesc2": "Study materials, gradebook and real-time communication.",
-
-  "sat": "SAT",
-  "satDesc1": "Testing",
-  "satDesc2": "Practice tests with instant feedback and AI recommendations.",
-
-  "ielts": "IELTS",
-  "ieltsDesc1": "Preparation",
-  "ieltsDesc2": "Listening, reading, writing and speaking with AI scoring."
-},
   "achievements": {
     "label": "ACHIEVEMENTS"
   },
@@ -89,8 +79,8 @@
   "footer": {
     "desc": "Your trusted partner for SAT and IELTS preparation. AI-powered learning platforms.",
     "platforms": "Platforms",
-     "opportunities":"Opportunities",
-    "statistics":"Statistics",
+    "opportunities": "Opportunities",
+    "statistics": "Statistics",
     "resources": "Resources",
     "contacts": "Contacts",
     "privacy": "Privacy Policy",
@@ -102,6 +92,7 @@
     "email": "Email",
     "password": "Password",
     "enter": "Log in",
+    "logout":"Log out",
     "done": "Done",
     "noAccount": "No account yet?",
     "hasAccount": "Already have an account?",

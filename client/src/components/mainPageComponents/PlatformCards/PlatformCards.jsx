@@ -1,25 +1,25 @@
-import { PlatformCard } from "../PlatformCard/PlatformCard"
-import styles from "./PlatformCards.module.css"
+import { PlatformCard } from "../PlatformCard/PlatformCard";
+import styles from "./PlatformCards.module.css";
 
 export const PlatformCards = () => {
   return (
     <div className="platformCards">
       <PlatformCard
-        pathTo={'/questionBank'}
+        pathTo={"/lms"}
         className={styles.blueCard}
         image="./platformIcons/book.svg"
-        titleKey="lms"
-        desc1Key="lmsDesc1"
-        desc2Key="lmsDesc2"
+        titleKey="platforms.lmsTitle"
+        desc1Key="platforms.lmsDesc1"
+        desc2Key="platforms.lmsDesc2"
       />
 
       <PlatformCard
-        pathTo={'/questionBank'}
+        pathTo={"/questionBank"}
         className={styles.greenCard}
         image="./platformIcons/done.svg"
-        titleKey="sat"
-        desc1Key="satDesc1"
-        desc2Key="satDesc2"
+        titleKey="platforms.satTitle"
+        desc1Key="platforms.satDesc1"
+        desc2Key="platforms.satDesc2"
       />
 
       {/* <PlatformCard
@@ -31,5 +31,5 @@ export const PlatformCards = () => {
         desc2Key="ieltsDesc2"
       /> */}
     </div>
-  )
-}
+  );
+};

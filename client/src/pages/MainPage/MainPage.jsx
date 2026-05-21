@@ -52,7 +52,7 @@ export const MainPage = () => {
 
       {/* RESULTS */}
       <section className="results">
-        <h2>Результаты студентов</h2>
+        <h2>{t("results.title")}</h2>
         <StudentCards />
       </section>
 

@@ -8,6 +8,7 @@ import { QuestionBank } from "./pages/QuestionBank/QuestionBank";
 import { MathTest } from "./pages/QuestionBank/Tests/MathTest";
 import { ReadingTest } from "./pages/QuestionBank/Tests/ReadingTest";
 import { Login } from "./pages/LoginPage/Login";
+import { LMS } from "./pages/LMS/LMS";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/mathTest" element={<MathTest />} />
         <Route path="/readingTest" element={<ReadingTest />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/lms" element={<LMS/>} />
 
       </Routes>
     </HashRouter>
