@@ -11,7 +11,7 @@ export const Login = () => {
     <div>
       <nav className={styles.loginNav}>
         <Link to="/#heroPage" className={styles.logoFlex}>
-          <img src="./logoIcon.png" alt="" className={styles.logoIcon} />
+          <img src="./logoIcon.svg" alt="" className={styles.logoIcon} />
           <div className={styles.logoTitle}>{t("nav.title")}</div>
         </Link>
         <div className={styles.langChanger}>
