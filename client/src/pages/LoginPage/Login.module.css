@@ -214,7 +214,6 @@ nav {
   color: var(--secondaryAccent-color);
 }
 
-/* TABLET */
 
 @media (max-width: 768px) {
   .loginPage,
@@ -233,7 +232,6 @@ nav {
     align-self: center;
 }
 
-/* MOBILE */
 
 @media (max-width: 480px) {
   .loginPage,

@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router"
-import styles from "./PlatformCard.module.css"
-import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router-dom";
+import styles from "./PlatformCard.module.css";
+import { useTranslation } from "react-i18next";
 
 export const PlatformCard = ({
   pathTo,
@@ -10,27 +10,27 @@ export const PlatformCard = ({
   desc1Key,
   desc2Key,
 }) => {
-  const nav = useNavigate()
+  const nav = useNavigate();
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
-    <div className={`${styles.card} ${className}`}>
+    <button onClick={() => nav(pathTo)} className={`${styles.card} ${className}`}>
       <img src={image} alt="" className={styles.cardIcon} />
 
-      <h3>{t(`platforms.${titleKey}`)}</h3>
+      <h3 className={styles.title}>{t(titleKey)}</h3>
 
       <p className={styles.desc1}>
-        {t(`platforms.${desc1Key}`)}
+        {t(desc1Key)}
       </p>
 
       <p className={styles.desc2}>
-        {t(`platforms.${desc2Key}`)}
+        {t(desc2Key)}
       </p>
 
-      <button onClick={()=>nav(pathTo)}>
-        Open <span>⭢</span>
+      <button onClick={() => nav(pathTo)}>
+        {t("questionBank.open")} <span>⭢</span>
       </button>
-    </div>
-  )
-}
+    </button>
+  );
+};

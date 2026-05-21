@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router";
 import styles from "./Navigation.module.css";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 export const Navigation = () => {
   const { t, i18n } = useTranslation();
   const nav = useNavigate();
+  const [logged, setLogged] = useState(false);
 
   return (
     <nav className={styles.nav}>
@@ -43,9 +45,15 @@ export const Navigation = () => {
             EN
           </div>
         </div>
-        <button className={styles.loginButton} onClick={() => nav("/login")}>
+        {!logged ? (
+          <button className={styles.loginButton} onClick={() => nav("/login")}>
             {t("auth.enter")}
-        </button>
+          </button>
+        ) : (
+          <button className={styles.loginButton} onClick={() => nav("/")}>
+            {t("auth.logout")}
+          </button>
+        )}
       </div>
     </nav>
   );

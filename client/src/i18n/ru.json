@@ -6,6 +6,9 @@
     "contact": "Контакты",
     "title": "Tutoring Platform"
   },
+  "results": {
+    "title": "Результаты студентов"
+  },
   "hero": {
     "title1": "Your future starts",
     "title2": "here.",
@@ -14,7 +17,7 @@
   "achievements": {
     "label": "ДОСТИЖЕНИЯ"
   },
-  
+
   "problem": {
     "label": "ПРОБЛЕМА",
     "title": "Подготовка к экзаменам не должна быть хаосом",
@@ -77,8 +80,8 @@
   "footer": {
     "desc": "Ваш надежный партнер в подготовке к SAT и IELTS. Комплексные платформы с ИИ.",
     "platforms": "Платформы",
-    "opportunities":"Возможности",
-    "statistics":"Статистика",
+    "opportunities": "Возможности",
+    "statistics": "Статистика",
     "resources": "Ресурсы",
     "contacts": "Контакты",
     "privacy": "Политика конфиденциальности",
@@ -90,6 +93,7 @@
     "email": "Почта",
     "password": "Пароль",
     "enter": "Войти",
+    "logout":"Выйти",
     "done": "Готово",
     "noAccount": "Еще нет аккаунта?",
     "hasAccount": "Уже есть аккаунт?",
