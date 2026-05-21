@@ -9,7 +9,7 @@ export const Navigation = () => {
   return (
     <nav className={styles.nav}>
       <Link to="/#heroPage" className={styles.logoFlex}>
-        <img src="./logoIcon.png" alt="" className={styles.logoIcon} />
+        <img src="./logoIcon.svg" alt="" className={styles.logoIcon} />
         <div className={styles.logoTitle}>{t("nav.title")}</div>
       </Link>
 
