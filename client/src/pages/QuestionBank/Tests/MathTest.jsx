@@ -1,44 +1,33 @@
 import { DesmosCalculator } from "../../../components/DesmosCalculator";
 import { Navigation } from "../../../components/Navigation/Navigation";
 import "./Tests.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { API_URL, authFetch } from '../../../api';
 
 export const MathTest = () => {
   const { t } = useTranslation();
 
-  const questions = [
-    {
-      id: 1,
-      text: "A commuter uses a pre-paid card. After how many trips will balance be $25?",
-      options: ["4", "20", "24", "28"],
-      answer: "20",
-    },
-    {
-      id: 2,
-      text: "A florist has 225 flowers. What is f?",
-      options: ["15", "210", "240", "3375"],
-      answer: "210",
-    },
-    {
-      id: 3,
-      text: "Equivalent equation to 4(x + 15) = 220?",
-      options: ["x+15=880", "x+15=55", "x+15=216", "x+15=40"],
-      answer: "x+15=55",
-    },
-    {
-      id: 4,
-      text: "Yoga vs Pilates classes question",
-      options: ["284", "458", "742", "1200"],
-      answer: "284",
-    },
-    {
-      id: 5,
-      text: "Which equation represents total cost?",
-      options: ["25m+55=330", "25m-55=330", "25+55m=330", "25-55m=330"],
-      answer: "25m+55=330",
-    },
-  ];
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  authFetch(`${API_URL}/api/questions`)
+    .then(res => res.json())
+    .then(data => {
+      // Берём 5 случайных вопросов из банка
+      const shuffled = data.sort(() => Math.random() - 0.5).slice(0, 5);
+      // Приводим формат бэкенда к формату компонента
+      const formatted = shuffled.map((q, i) => ({
+        id: i + 1,
+        text: q.question,
+        options: [q.option_a, q.option_b, q.option_c, q.option_d],
+        answer: { a: q.option_a, b: q.option_b, c: q.option_c, d: q.option_d }[q.answer],
+      }));
+      setQuestions(formatted);
+      setLoading(false);
+    });
+}, []);
 
   const [selected, setSelected] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -78,6 +67,7 @@ export const MathTest = () => {
     return "good";
   };
 
+  if (loading) return <p style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</p>;
   return (
     <>
       <Navigation />
