@@ -80,3 +80,16 @@
   background-color: var(--accent-color);
   color: var(--secondaryAccent-color);
 }
+
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* отступ между почтой и кнопкой */
+}
+
+.userEmailText {
+  font-weight: 500;
+  font-size: 20px;
+  margin-left: 20px;
+  color: #fefefe; /* настройте цвет под ваш дизайн */
+}

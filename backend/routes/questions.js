@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { requireAuth } from '../middlewares/requireAuth.js';
-import { checkRole } from '../middlewares/checkRole.js';
+import { requireAuth } from '../controllers/middlewares/requireAuth.js';
+import { checkRole } from '../controllers/middlewares/checkRole.js';
 import {
   getQuestions,
   createQuestion,

@@ -1,20 +1,27 @@
 import supabase from '../config/supabaseClient.js';
 
 export async function getQuestions(req, res) {
-  const { data, error } = await supabase
-    .from('question_bank')
-    .select('*');
+  const { type } = req.query;
+
+  let query = supabase.from("question_bank").select("*");
+
+  if (type) {
+    query = query.eq("type", type);
+  }
+
+  const { data, error } = await query;
 
   if (error) return res.status(500).json({ error: error.message });
+
   res.json(data);
 }
 
 export async function createQuestion(req, res) {
-  const { question, option_a, option_b, option_c, option_d, answer } = req.body;
+  const { question, option_a, option_b, option_c, option_d, answer, type } = req.body;
 
   const { data, error } = await supabase
     .from('question_bank')
-    .insert({ question, option_a, option_b, option_c, option_d, answer })
+    .insert({ question, option_a, option_b, option_c, option_d, answer, type })
     .select()
     .single();
 

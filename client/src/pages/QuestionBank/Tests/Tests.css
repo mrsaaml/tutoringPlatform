@@ -224,3 +224,27 @@
   width: 20%;
 }
 /* reading */
+
+
+.deleteQuestionBtn {
+  background-color: #fee2e2;
+  color: #ef4444;
+  border: 1px solid #fca5a5;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  float: right;
+  width: fit-content;
+}
+
+.deleteQuestionBtn:hover {
+  background-color: #fecaca;
+  color: #dc2626;
+}

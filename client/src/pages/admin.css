@@ -1,0 +1,120 @@
+
+/* math test */
+.adminFormContainer {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 40px;
+  margin-left: 30vw;
+  width: 60%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.adminForm h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #1e293b;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 10px;
+}
+
+.adminForm input[type="text"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background-color: #f8fafc;
+  box-sizing: border-box;
+}
+
+.adminForm input[type="text"]:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGridInputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.formGroupSelect {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  color: #475569;
+}
+
+.adminForm select {
+  padding: 8px 16px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.adminSubmitBtn {
+  background-color: var(--accent-color); 
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.lms .adminSubmitBtn, .lms input {
+  margin-top: 2vh;
+}
+
+.adminSubmitBtn:hover {
+  background-color: #059669;
+}
+
+.formErrorText {
+  color: #ef4444;
+  background-color: #fef2f2;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  border-left: 4px solid #ef4444;
+}
+
+.formSuccessText {
+  color: #10b981;
+  background-color: #ecfdf5;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  border-left: 4px solid #10b981;
+}
+
+@media (max-width: 600px) {
+  .formGridInputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+.readingPage .adminFormContainer {
+  width: 80%;
+  margin-right: 30vw;
+}
+
