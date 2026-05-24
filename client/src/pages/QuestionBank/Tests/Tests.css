@@ -248,3 +248,96 @@
   background-color: #fecaca;
   color: #dc2626;
 }
+
+.aiTutorSection {
+  margin-top: 15px;
+  border-top: 1px dashed #ddd;
+  padding-top: 12px;
+}
+
+.aiTutorBtn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.aiTutorBtn:hover {
+  filter: brightness(0.7);
+}
+
+.aiChatBox {
+  margin-top: 10px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.aiChatMessages {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.aiMessage {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.aiMessage.user {
+  background-color: #e0f2fe;
+  align-self: flex-end;
+  color: #0369a1;
+  max-width: 80%;
+}
+
+.aiMessage.assistant {
+  background-color: #ffffff;
+  border: 1px solid #f1f5f9;
+  align-self: flex-start;
+  color: #334155;
+  max-width: 90%;
+}
+
+.aiChatInputGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.aiChatInputGroup input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.aiChatInputGroup button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.aiChatInputGroup button:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+}
+.cover {
+  width: 100%;
+  align-items: start;
+  display: flex;
+  justify-content: space-between;
+}
