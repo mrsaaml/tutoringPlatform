@@ -1,9 +1,351 @@
+// import { DesmosCalculator } from "../../../components/DesmosCalculator";
+// import { Navigation } from "../../../components/Navigation/Navigation";
+// import "./Tests.css";
+// import { useState, useEffect } from "react";
+// import { useTranslation } from "react-i18next";
+// import { API_URL, authFetch } from "../../../api";
+// import { jwtDecode } from "jwt-decode";
+
+// export const MathTest = () => {
+//   const { t } = useTranslation();
+
+//   const [questions, setQuestions] = useState([]);
+//   const [loading, setLoading] = useState(true);
+
+//   const [isAdmin, setIsAdmin] = useState(false);
+
+//   const [newQuestion, setNewQuestion] = useState({
+//     question: "",
+//     option_a: "",
+//     option_b: "",
+//     option_c: "",
+//     option_d: "",
+//     answer: "a",
+//   });
+//   const [formError, setFormError] = useState("");
+//   const [formSuccess, setFormSuccess] = useState("");
+
+//   useEffect(() => {
+//     const token = localStorage.getItem("jwt");
+//     if (token) {
+//       try {
+//         const decoded = jwtDecode(token);
+//         if (decoded.email === "adinai@gmail.com") {
+//           setTimeout(() => setIsAdmin(true), 1000);
+//         }
+//       } catch (e) {
+//         console.error("Ошибка проверки токена:", e);
+//       }
+//     }
+
+//     authFetch(`${API_URL}/api/questions`)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const shuffled = data.sort(() => Math.random() - 0.5).slice(0, 5);
+//         const formatted = shuffled.map((q, i) => ({
+//           id: i + 1,
+//           dbId: q.id,
+//           text: q.question,
+//           options: [q.option_a, q.option_b, q.option_c, q.option_d],
+//           answer: {
+//             a: q.option_a,
+//             b: q.option_b,
+//             c: q.option_c,
+//             d: q.option_d,
+//           }[q.answer],
+//         }));
+//         setQuestions(formatted);
+//         setLoading(false);
+//       })
+//       .catch((err) => {
+//         console.error("Ошибка загрузки вопросов:", err);
+//         setLoading(false);
+//       });
+//   }, []);
+
+//   const [selected, setSelected] = useState({});
+//   const [submitted, setSubmitted] = useState(false);
+//   const [result, setResult] = useState(0);
+//   const [openModal, setOpenModal] = useState(false);
+
+//   const handleAddQuestion = async (e) => {
+//   e.preventDefault();
+//   setFormError('');
+//   setFormSuccess('');
+
+//   if (!newQuestion.question || !newQuestion.option_a || !newQuestion.option_b || !newQuestion.option_c || !newQuestion.option_d) {
+//     return setFormError('Пожалуйста, заполните все поля вопроса');
+//   }
+
+//   try {
+//     const res = await authFetch(`${API_URL}/api/questions`, {
+//       method: 'POST',
+//       body: JSON.stringify(newQuestion)
+//     });
+
+//     const data = await res.json();
+
+//     if (!res.ok) {
+//       throw new Error(data.error || 'Не удалось сохранить вопрос');
+//     }
+
+//     setFormSuccess('Вопрос успешно добавлен в банк вопросов!');
+
+//     const formattedNewQuestion = {
+//       id: questions.length + 1,
+//       dbId: data.id,
+//       text: data.question,
+//       options: [data.option_a, data.option_b, data.option_c, data.option_d],
+//       answer: { a: data.option_a, b: data.option_b, c: data.option_c, d: data.option_d }[data.answer],
+//     };
+
+//     setQuestions(prev => [...prev, formattedNewQuestion]);
+
+//     setNewQuestion({ question: '', option_a: '', option_b: '', option_c: '', option_d: '', answer: 'a' });
+//   } catch (err) {
+//     setFormError(err.message);
+//   }
+// };
+
+//   const choose = (qId, option) => {
+//     if (submitted) return;
+//     setSelected((prev) => ({ ...prev, [qId]: option }));
+//   };
+
+//   const allAnswered = questions.every((q) => selected[q.id]);
+
+//   const submit = () => {
+//     if (!allAnswered) return;
+
+//     let score = 0;
+//     questions.forEach((q) => {
+//       if (selected[q.id] === q.answer) score++;
+//     });
+
+//     setResult(score);
+//     setSubmitted(true);
+//     setOpenModal(true);
+//   };
+
+//   const closeModal = () => {
+//     setOpenModal(false);
+//     setSelected({});
+//     setSubmitted(false);
+//     setResult(0);
+//   };
+
+//   const getResultColor = () => {
+//     if (result <= 2) return "bad";
+//     if (result === 3 || result === 4) return "medium";
+//     return "good";
+//   };
+
+//   const handleDeleteQuestion = async (qIdInDatabase) => {
+//     if (
+//       !window.confirm(
+//         "Вы уверены, что хотите удалить этот вопрос из базы навсегда?",
+//       )
+//     )
+//       return;
+
+//     try {
+//       const res = await authFetch(`${API_URL}/api/questions/${qIdInDatabase}`, {
+//         method: "DELETE",
+//       });
+
+//       if (res.ok) {
+//         alert("Вопрос удален!");
+//         setQuestions((prev) =>
+//     prev
+//       .filter((q) => q.dbId !== qIdInDatabase)
+//       .map((q, index) => ({
+//         ...q,
+//         id: index + 1,
+//       }))
+//   );
+//       } else {
+//         const data = await res.json();
+//         alert(`Ошибка: ${data.error}`);
+//       }
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
+
+//   if (loading)
+//     return <p style={{ textAlign: "center", marginTop: "2rem" }}>Loading...</p>;
+
+//   return (
+//     <>
+//       <Navigation />
+
+//       <section className="mathTestPage">
+//         {isAdmin && (
+//           <div className="adminFormContainer">
+//             <form onSubmit={handleAddQuestion} className="adminForm">
+//               <h3>Добавить вопрос в общую базу (Админ)</h3>
+
+//               {formError && <p className="formErrorText">{formError}</p>}
+//               {formSuccess && <p className="formSuccessText">{formSuccess}</p>}
+
+//               <div className="formGroup">
+//                 <input
+//                   type="text"
+//                   placeholder="Текст вопроса"
+//                   value={newQuestion.question}
+//                   onChange={(e) =>
+//                     setNewQuestion({ ...newQuestion, question: e.target.value })
+//                   }
+//                 />
+//               </div>
+
+//               <div className="formGridInputs">
+//                 <input
+//                   type="text"
+//                   placeholder="Вариант A"
+//                   value={newQuestion.option_a}
+//                   onChange={(e) =>
+//                     setNewQuestion({ ...newQuestion, option_a: e.target.value })
+//                   }
+//                 />
+//                 <input
+//                   type="text"
+//                   placeholder="Вариант B"
+//                   value={newQuestion.option_b}
+//                   onChange={(e) =>
+//                     setNewQuestion({ ...newQuestion, option_b: e.target.value })
+//                   }
+//                 />
+//                 <input
+//                   type="text"
+//                   placeholder="Вариант C"
+//                   value={newQuestion.option_c}
+//                   onChange={(e) =>
+//                     setNewQuestion({ ...newQuestion, option_c: e.target.value })
+//                   }
+//                 />
+//                 <input
+//                   type="text"
+//                   placeholder="Вариант D"
+//                   value={newQuestion.option_d}
+//                   onChange={(e) =>
+//                     setNewQuestion({ ...newQuestion, option_d: e.target.value })
+//                   }
+//                 />
+//               </div>
+
+//               <div className="formGroupSelect">
+//                 <label>Правильный ответ: </label>
+//                 <select
+//                   value={newQuestion.answer}
+//                   onChange={(e) =>
+//                     setNewQuestion({ ...newQuestion, answer: e.target.value })
+//                   }
+//                 >
+//                   <option value="a">A</option>
+//                   <option value="b">B</option>
+//                   <option value="c">C</option>
+//                   <option value="d">D</option>
+//                 </select>
+//               </div>
+
+//               <button type="submit" className="adminSubmitBtn">
+//                 Сохранить вопрос
+//               </button>
+//             </form>
+//           </div>
+//         )}
+
+//         <h2>{t("mathTest.title")}</h2>
+
+//         <div className="flexbox">
+//           <div className="left">
+//             <DesmosCalculator />
+//           </div>
+
+//           <div className="right">
+//             <div className="testWrapper">
+//               {questions.map((q) => (
+//                 <div
+//                   key={q.id}
+//                   className={`questionCard ${
+//                     submitted && selected[q.id] === q.answer
+//                       ? "correct"
+//                       : submitted
+//                         ? "wrong"
+//                         : ""
+//                   }`}
+//                 >
+//                   <p className="questionText">
+//                     {isAdmin && (
+//                       <button
+//                         className="deleteQuestionBtn"
+//                         onClick={() => handleDeleteQuestion(q.dbId)}
+//                       >
+//                         🗑️
+//                       </button>
+//                     )}
+//                     {q.id}. {q.text}
+//                   </p>
+
+//                   <div className="options">
+//                     {q.options.map((opt) => (
+//                       <button
+//                         key={opt}
+//                         onClick={() => choose(q.id, opt)}
+//                         className={`optionBtn ${
+//                           selected[q.id] === opt ? "active" : ""
+//                         } ${submitted && opt === q.answer ? "showCorrect" : ""}`}
+//                       >
+//                         {opt}
+//                       </button>
+//                     ))}
+//                   </div>
+//                 </div>
+//               ))}
+
+//               <button
+//                 className={`submitBtn ${!allAnswered ? "disabled" : ""}`}
+//                 onClick={submit}
+//                 disabled={!allAnswered}
+//               >
+//                 {t("mathTest.submit")}
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {openModal && (
+//         <div className="modalOverlay" onClick={closeModal}>
+//           <div className="modal" onClick={(e) => e.stopPropagation()}>
+//             <h3>{t("mathTest.result")}</h3>
+
+//             <div className={`resultScore ${getResultColor()}`}>
+//               {result} / {questions.length}
+//             </div>
+
+//             <p className="resultText">
+//               {result <= 2 && t("mathTest.tryAgain")}
+//               {result === 3 || result === 4 ? t("mathTest.notBad") : ""}
+//               {result === 5 ? t("mathTest.great") : ""}
+//             </p>
+
+//             <button onClick={closeModal}>{t("mathTest.close")}</button>
+//           </div>
+//         </div>
+//       )}
+//     </>
+//   );
+// };
+
 import { DesmosCalculator } from "../../../components/DesmosCalculator";
 import { Navigation } from "../../../components/Navigation/Navigation";
 import "./Tests.css";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { API_URL, authFetch } from '../../../api';
+import { API_URL, authFetch } from "../../../api";
+import { jwtDecode } from "jwt-decode";
 
 export const MathTest = () => {
   const { t } = useTranslation();
@@ -11,32 +353,74 @@ export const MathTest = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  authFetch(`${API_URL}/api/questions`)
-    .then(res => res.json())
-    .then(data => {
-      // Берём 5 случайных вопросов из банка
-      const shuffled = data.sort(() => Math.random() - 0.5).slice(0, 5);
-      // Приводим формат бэкенда к формату компонента
-      const formatted = shuffled.map((q, i) => ({
-        id: i + 1,
-        text: q.question,
-        options: [q.option_a, q.option_b, q.option_c, q.option_d],
-        answer: { a: q.option_a, b: q.option_b, c: q.option_c, d: q.option_d }[q.answer],
-      }));
-      setQuestions(formatted);
-      setLoading(false);
-    });
-}, []);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const [newQuestion, setNewQuestion] = useState({
+    question: "",
+    option_a: "",
+    option_b: "",
+    option_c: "",
+    option_d: "",
+    answer: "a",
+  });
+
+  const [formError, setFormError] = useState("");
+  const [formSuccess, setFormSuccess] = useState("");
 
   const [selected, setSelected] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [result, setResult] = useState(0);
   const [openModal, setOpenModal] = useState(false);
 
-  const choose = (qId, option) => {
+  // ===== FETCH =====
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded.email === "adinai@gmail.com") {
+          setTimeout(() => setIsAdmin(true), 1000);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    authFetch(`${API_URL}/api/questions?type=math`)
+      .then((res) => res.json())
+      .then((data) => {
+        const filtered = data.filter((q) => q.type === "math");
+        const shuffled = filtered.sort(() => Math.random() - 0.5).slice(0, 5);
+        const formatted = shuffled.map((q) => ({
+          id: q.id,
+          text: q.question,
+          options: [q.option_a, q.option_b, q.option_c, q.option_d],
+          answer: {
+            a: q.option_a,
+            b: q.option_b,
+            c: q.option_c,
+            d: q.option_d,
+          }[q.answer],
+        }));
+
+        setQuestions(formatted);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+
+  // ===== ANSWERS =====
+  const choose = (id, option) => {
     if (submitted) return;
-    setSelected((prev) => ({ ...prev, [qId]: option }));
+
+    setSelected((prev) => ({
+      ...prev,
+      [id]: option,
+    }));
   };
 
   const allAnswered = questions.every((q) => selected[q.id]);
@@ -45,6 +429,7 @@ useEffect(() => {
     if (!allAnswered) return;
 
     let score = 0;
+
     questions.forEach((q) => {
       if (selected[q.id] === q.answer) score++;
     });
@@ -63,15 +448,176 @@ useEffect(() => {
 
   const getResultColor = () => {
     if (result <= 2) return "bad";
-    if (result === 3 || result === 4) return "medium";
+    if (result <= 4) return "medium";
     return "good";
   };
 
-  if (loading) return <p style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</p>;
+  // ===== ADD QUESTION =====
+  const handleAddQuestion = async (e) => {
+    e.preventDefault();
+    setFormError("");
+    setFormSuccess("");
+
+    if (
+      !newQuestion.question ||
+      !newQuestion.option_a ||
+      !newQuestion.option_b ||
+      !newQuestion.option_c ||
+      !newQuestion.option_d
+    ) {
+      setFormError("Пожалуйста, заполните все поля вопроса");
+      return;
+    }
+
+    try {
+      const res = await authFetch(`${API_URL}/api/questions`, {
+        method: "POST",
+        body: JSON.stringify({ ...newQuestion, type: "reading" }),
+      });
+
+      if (!res.ok) {
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await res.json();
+          throw new Error(errorData.error || "Не удалось сохранить вопрос");
+        } else {
+          throw new Error(`Сервер вернул ошибку со статусом ${res.status}. Проверьте логи бэкенда.`);
+        }
+      }
+
+      const data = await res.json();
+
+      setQuestions((prev) => [
+        ...prev,
+        {
+          id: prev.length + 1,
+          dbId: data.id,
+          text: data.question,
+          options: [data.option_a, data.option_b, data.option_c, data.option_d],
+          answer: {
+            a: data.option_a,
+            b: data.option_b,
+            c: data.option_c,
+            d: data.option_d,
+          }[data.answer],
+        },
+      ]);
+      setSelected({});
+      setFormSuccess("Вопрос успешно добавлен в банк вопросов!");
+      setNewQuestion({
+        question: "",
+        option_a: "",
+        option_b: "",
+        option_c: "",
+        option_d: "",
+        answer: "a",
+        type:'math'
+      });
+   
+    } catch (err) {
+      setFormError(err.message);
+    }
+  };
+  // ===== DELETE =====
+  const handleDeleteQuestion = async (id) => {
+    if (!window.confirm("Удалить?")) return;
+
+    const res = await authFetch(`${API_URL}/api/questions/${id}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+   window.location.reload()
+
+      setQuestions((prev) => prev.filter((q) => q.id !== id));
+    }
+  };
+
+  if (loading) {
+    return <p style={{ textAlign: "center" }}>Loading...</p>;
+  }
+
   return (
     <>
       <Navigation />
+
       <section className="mathTestPage">
+        {isAdmin && (
+          <div className="adminFormContainer">
+            <form onSubmit={handleAddQuestion} className="adminForm">
+              <h3>Добавить вопрос в общую базу (Админ)</h3>
+
+              {formError && <p className="formErrorText">{formError}</p>}
+              {formSuccess && <p className="formSuccessText">{formSuccess}</p>}
+
+              <div className="formGroup">
+                <input
+                  type="text"
+                  placeholder="Текст вопроса"
+                  value={newQuestion.question}
+                  onChange={(e) =>
+                    setNewQuestion({ ...newQuestion, question: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="formGridInputs">
+                <input
+                  type="text"
+                  placeholder="Вариант A"
+                  value={newQuestion.option_a}
+                  onChange={(e) =>
+                    setNewQuestion({ ...newQuestion, option_a: e.target.value })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Вариант B"
+                  value={newQuestion.option_b}
+                  onChange={(e) =>
+                    setNewQuestion({ ...newQuestion, option_b: e.target.value })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Вариант C"
+                  value={newQuestion.option_c}
+                  onChange={(e) =>
+                    setNewQuestion({ ...newQuestion, option_c: e.target.value })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Вариант D"
+                  value={newQuestion.option_d}
+                  onChange={(e) =>
+                    setNewQuestion({ ...newQuestion, option_d: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="formGroupSelect">
+                <label>Правильный ответ: </label>
+                <select
+                  value={newQuestion.answer}
+                  onChange={(e) =>
+                    setNewQuestion({ ...newQuestion, answer: e.target.value })
+                  }
+                >
+                  <option value="a">A</option>
+                  <option value="b">B</option>
+                  <option value="c">C</option>
+                  <option value="d">D</option>
+                </select>
+              </div>
+
+              <button type="submit" className="adminSubmitBtn">
+                Сохранить вопрос
+              </button>
+            </form>
+          </div>
+        )}
+
         <h2>{t("mathTest.title")}</h2>
 
         <div className="flexbox">
@@ -81,7 +627,7 @@ useEffect(() => {
 
           <div className="right">
             <div className="testWrapper">
-              {questions.map((q) => (
+              {questions.map((q, index) => (
                 <div
                   key={q.id}
                   className={`questionCard ${
@@ -93,7 +639,15 @@ useEffect(() => {
                   }`}
                 >
                   <p className="questionText">
-                    {q.id}. {q.text}
+                    {isAdmin && (
+                      <button
+                        className="deleteQuestionBtn"
+                        onClick={() => handleDeleteQuestion(q.id)}
+                      >
+                        🗑️
+                      </button>
+                    )}
+                    {index + 1}. {q.text}
                   </p>
 
                   <div className="options">

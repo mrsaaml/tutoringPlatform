@@ -24,6 +24,7 @@ export const Login = () => {
       if (!res.ok) return setError(data.error || 'Login failed');
 
       localStorage.setItem('jwt', data.token);
+      window.dispatchEvent(new Event("storage"));
       navigate('/');
     } catch {
       setError('Server error');
@@ -42,6 +43,7 @@ export const Login = () => {
       if (!res.ok) return setError(data.error || 'Registration failed');
 
       localStorage.setItem('jwt', data.token);
+      window.dispatchEvent(new Event("storage"));
       navigate('/');
     } catch {
       setError('Server error');

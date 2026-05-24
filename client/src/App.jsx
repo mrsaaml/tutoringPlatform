@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import { ScrollToHash } from "./components/ScrollToHash"
 import "./App.css";
 import "./adaptive.css";
+import './pages/admin.css'
 
 import { MainPage } from "./pages/MainPage/MainPage";
 import { QuestionBank } from "./pages/QuestionBank/QuestionBank";

@@ -61,3 +61,40 @@ CREATE POLICY "read questions" ON public.question_bank
 -- lms: anyone authenticated can read
 CREATE POLICY "read lms" ON public.lms
   FOR SELECT USING (auth.role() = 'authenticated');
+
+-- 1. Создаем вспомогательную функцию для проверки, является ли текущий юзер админом
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS boolean AS $$
+BEGIN
+  RETURN EXISTS (
+    SELECT 1 FROM public.profiles
+    WHERE id = auth.uid() AND role = 'admin'
+  );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- 2. Политики для таблицы lms (Админ может всё, пользователи — только читать)
+CREATE POLICY "admin insert lms" ON public.lms
+  FOR INSERT WITH CHECK (public.is_admin());
+
+CREATE POLICY "admin update lms" ON public.lms
+  FOR UPDATE USING (public.is_admin());
+
+CREATE POLICY "admin delete lms" ON public.lms
+  FOR DELETE USING (public.is_admin());
+
+
+-- 3. Политики для таблицы question_bank (Админ может всё, пользователи — только читать)
+CREATE POLICY "admin insert questions" ON public.question_bank
+  FOR INSERT WITH CHECK (public.is_admin());
+
+CREATE POLICY "admin update questions" ON public.question_bank
+  FOR UPDATE USING (public.is_admin());
+
+CREATE POLICY "admin delete questions" ON public.question_bank
+  FOR DELETE USING (public.is_admin());
+
+
+-- 4. Политика для profiles: разрешаем админу смотреть чужие профили (чтобы мидлвар на бэке работал)
+CREATE POLICY "admin select profiles" ON public.profiles
+  FOR SELECT USING (public.is_admin());

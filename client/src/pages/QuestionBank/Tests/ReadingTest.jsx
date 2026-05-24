@@ -1,75 +1,80 @@
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigation } from "../../../components/Navigation/Navigation";
+import { API_URL, authFetch } from "../../../api";
+import { jwtDecode } from "jwt-decode";
 import "./Tests.css";
-import { useState } from "react";
-
-const questions = [
-  {
-    id: 1,
-    text: "When investigating the link between glacial melt and rising sea levels, scientists often require advanced equipment...",
-    options: ["levels and", "levels,", "levels", "levels, and"],
-    answer: "levels,",
-  },
-  {
-    id: 2,
-    text: "When consumed as a trace component of drinking water, selenium has beneficial effects... These facts are ____ important to ecological chemist Karen Jenni.",
-    options: [
-      "important to:",
-      "important to",
-      "important: to",
-      "important to;",
-    ],
-    answer: "important to",
-  },
-  {
-    id: 3,
-    text: "New research on giant kelp has revealed that this underwater plant can adapt to nutrient shortages... kelp thrives on two ____ and treats them as interchangeable.",
-    options: [
-      "nutrients, urea, and ammonium",
-      "nutrientsm uream and ammonium",
-      "nutrients urea and ammonium",
-      "Nutrients, urea and ammonium",
-    ],
-    answer: "nutrients urea and ammonium",
-  },
-  {
-    id: 4,
-    text: "Medical practitioners during the Middle Ages believed emotions were explained by substances known ____ both then and now.",
-    options: [
-      "known, both then and now,",
-      "known both the and now,",
-      "known both then, and now,",
-      "known, both then and now",
-    ],
-    answer: "known, both then and now,",
-  },
-  {
-    id: 5,
-    text: "Polynesian and Micronesian navigators used stick ____ that provided information about islands and ocean currents.",
-    options: [
-      "charts, map-like constructions:",
-      "charts map-like constructions,",
-      "charts, map-like constructions",
-      "charts map-like constructions",
-    ],
-    answer: "charts, map-like constructions",
-  },
-];
 
 export const ReadingTest = () => {
   const { t } = useTranslation();
+
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const [newQuestion, setNewQuestion] = useState({
+    question: "",
+    option_a: "",
+    option_b: "",
+    option_c: "",
+    option_d: "",
+    answer: "a",
+  });
+
+  const [formError, setFormError] = useState("");
+  const [formSuccess, setFormSuccess] = useState("");
 
   const [selected, setSelected] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [result, setResult] = useState(0);
   const [openModal, setOpenModal] = useState(false);
 
-  const choose = (qId, option) => {
-    if (submitted) return; // нельзя менять после submit
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded.email === "adinai@gmail.com") {
+          setTimeout(() => setIsAdmin(true), 1000);
+        }
+      } catch (e) {
+        console.error("Ошибка проверки токена:", e);
+      }
+    }
+
+    authFetch(`${API_URL}/api/questions?type=reading`)
+      .then((res) => res.json())
+      .then((data) => {
+        const formatted = data.map((q) => ({
+          id: q.id,
+          text: q.question,
+          options: [q.option_a, q.option_b, q.option_c, q.option_d],
+          answer: {
+            a: q.option_a,
+            b: q.option_b,
+            c: q.option_c,
+            d: q.option_d,
+          }[q.answer],
+          type: "reading",
+        }));
+
+        setQuestions(formatted);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Ошибка загрузки вопросов:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  const choose = (id, option) => {
+    if (submitted) return;
 
     setSelected((prev) => ({
       ...prev,
-      [qId]: option,
+      [id]: option,
     }));
   };
 
@@ -97,21 +102,207 @@ export const ReadingTest = () => {
     setSubmitted(false);
     setResult(0);
   };
+
   const getResultColor = () => {
     if (result <= 2) return "bad";
     if (result === 3 || result === 4) return "medium";
     return "good";
   };
 
+  const handleAddQuestion = async (e) => {
+    e.preventDefault();
+    setFormError("");
+    setFormSuccess("");
+
+    if (
+      !newQuestion.question ||
+      !newQuestion.option_a ||
+      !newQuestion.option_b ||
+      !newQuestion.option_c ||
+      !newQuestion.option_d
+    ) {
+      setFormError("Пожалуйста, заполните все поля вопроса");
+      return;
+    }
+
+    try {
+      const res = await authFetch(`${API_URL}/api/questions`, {
+        method: "POST",
+        body: JSON.stringify({ ...newQuestion, type: "reading" }),
+      });
+
+      if (!res.ok) {
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await res.json();
+          throw new Error(errorData.error || "Не удалось сохранить вопрос");
+        } else {
+          throw new Error(`Сервер вернул ошибку со статусом ${res.status}. Проверьте логи бэкенда.`);
+        }
+      }
+
+      const data = await res.json();
+
+      setQuestions((prev) => [
+        ...prev,
+        {
+          id: prev.length + 1,
+          dbId: data.id,
+          text: data.question,
+          options: [data.option_a, data.option_b, data.option_c, data.option_d],
+          answer: {
+            a: data.option_a,
+            b: data.option_b,
+            c: data.option_c,
+            d: data.option_d,
+          }[data.answer],
+        },
+      ]);
+      setSelected({});
+      setFormSuccess("Вопрос успешно добавлен в банк вопросов!");
+      setNewQuestion({
+        question: "",
+        option_a: "",
+        option_b: "",
+        option_c: "",
+        option_d: "",
+        answer: "a",
+        type:'reading'
+      });
+    } catch (err) {
+      setFormError(err.message);
+    }
+  };
+
+ const handleDeleteQuestion = async (id) => {
+  if (!window.confirm("Вы уверены, что хотите удалить этот вопрос навсегда?")) {
+    return;
+  }
+
+  try {
+    const res = await authFetch(`${API_URL}/api/questions/${id}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      // Просто убираем удаленный вопрос из стейта по его UUID
+      setQuestions((prev) => prev.filter((q) => q.id !== id));
+    } else {
+      const data = await res.json();
+      alert(`Ошибка: ${data.error}`);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+  if (loading) {
+    return <p style={{ textAlign: "center", marginTop: "2rem" }}>Loading...</p>;
+  }
+
   return (
     <>
       <Navigation />
 
-      <section className="mathTestPage">
+      <section className="mathTestPage readingPage">
+        {isAdmin && (
+          <div className="adminFormContainer">
+            <form onSubmit={handleAddQuestion} className="adminForm">
+              <h3>Добавить вопрос</h3>
+
+              {formError && <p className="formErrorText">{formError}</p>}
+              {formSuccess && <p className="formSuccessText">{formSuccess}</p>}
+
+              <div className="formGroup">
+                <input
+                  type="text"
+                  placeholder="Текст вопроса"
+                  value={newQuestion.question}
+                  onChange={(e) =>
+                    setNewQuestion({
+                      ...newQuestion,
+                      question: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div className="formGridInputs">
+                <input
+                  type="text"
+                  placeholder="Вариант A"
+                  value={newQuestion.option_a}
+                  onChange={(e) =>
+                    setNewQuestion({
+                      ...newQuestion,
+                      option_a: e.target.value,
+                    })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Вариант B"
+                  value={newQuestion.option_b}
+                  onChange={(e) =>
+                    setNewQuestion({
+                      ...newQuestion,
+                      option_b: e.target.value,
+                    })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Вариант C"
+                  value={newQuestion.option_c}
+                  onChange={(e) =>
+                    setNewQuestion({
+                      ...newQuestion,
+                      option_c: e.target.value,
+                    })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Вариант D"
+                  value={newQuestion.option_d}
+                  onChange={(e) =>
+                    setNewQuestion({
+                      ...newQuestion,
+                      option_d: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div className="formGroupSelect">
+                <label>Правильный ответ: </label>
+                <select
+                  value={newQuestion.answer}
+                  onChange={(e) =>
+                    setNewQuestion({
+                      ...newQuestion,
+                      answer: e.target.value,
+                    })
+                  }
+                >
+                  <option value="a">A</option>
+                  <option value="b">B</option>
+                  <option value="c">C</option>
+                  <option value="d">D</option>
+                </select>
+              </div>
+
+              <button type="submit" className="adminSubmitBtn">
+                Сохранить вопрос
+              </button>
+            </form>
+          </div>
+        )}
+
         <h2>SAT Verbal</h2>
 
         <div className="testWrapper">
-          {questions.map((q) => (
+          {questions.map((q, index) => (
             <div
               key={q.id}
               className={`questionCard ${
@@ -123,13 +314,21 @@ export const ReadingTest = () => {
               }`}
             >
               <p className="questionText">
-                {q.id}. {q.text}
+                {isAdmin && (
+                  <button
+                    className="deleteQuestionBtn"
+                    onClick={() => handleDeleteQuestion(q.id)}
+                  >
+                    🗑️
+                  </button>
+                )}
+                {index + 1}. {q.text}
               </p>
 
               <div className="options">
-                {q.options.map((opt) => (
+                {q.options.map((opt, index) => (
                   <button
-                    key={opt}
+                    key={`${q.id}-${index}`}
                     onClick={() => choose(q.id, opt)}
                     className={`optionBtn ${
                       selected[q.id] === opt ? "active" : ""
@@ -152,7 +351,6 @@ export const ReadingTest = () => {
         </button>
       </section>
 
-      {/* MODAL */}
       {openModal && (
         <div className="modalOverlay" onClick={closeModal}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
