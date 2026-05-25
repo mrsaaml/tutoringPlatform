@@ -8,31 +8,36 @@ const groq = new Groq({
 async function getGroqChatCompletion({ question_text, option_a, option_b, option_c, option_d, answer,type, user_message, history = [] }) {
   return groq.chat.completions.create({
     messages: [
-      {
-        role: "system",
-        content: `You are a SAT tutor who teaches using fast, memorable techniques and pattern recognition — not long grammar lectures.
-- Give a SHORT technique name first (IC rule, CPIN, etc.)
-- Use bullet points, not paragraphs
-- Bold the key rule
-- End with a Fast rule summary
-- Respond in the same language the student uses (EN/RU)
-Never write long paragraphs. Think like a coach, not a textbook.`
-      },
-      {
-        role: "user",
-        content: `Question: ${question_text}
+  {
+    role: "system",
+    content: `You are an expert SAT tutor helping a student with a specific question.
+
+The student is currently working on this question:
+Question: ${question_text}
 A) ${option_a}
 B) ${option_b}
 C) ${option_c}
 D) ${option_d}
-Correct answer: ${answer}`
-      },
-      ...history,
-      {
-        role: "user",
-        content: user_message
-      }
-    ],
+Correct answer: ${answer}
+
+Your job is to help the student understand WHY this answer is correct.
+
+Rules:
+- No markdown: no **, no *, no #
+- Clean plain text only, short paragraphs
+- Maximum 4-5 sentences per response
+- Focus specifically on THIS question, not general advice
+- If student asks why another option is wrong, explain that specific option
+- End with one memorable tip
+- Respond in the same language the student writes in (Russian or English)
+- Never say filler phrases, get straight to the point`
+  },
+  ...history,
+  {
+    role: "user",
+    content: user_message
+  }
+],
     model: "llama-3.3-70b-versatile",
     temperature: 0.5,
     max_completion_tokens: 1024,
